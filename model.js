@@ -1,6 +1,6 @@
 import SimpleLinkedList from "./simplelinkedlist.js";
 
-export {init}
+export {init, getFirstBall, getNextBall, loadCannon, getCannonBall, addRandomBall, dump}
 
 const list = new SimpleLinkedList();
 
@@ -24,17 +24,23 @@ function dump() {
 
 // **** WRAPPERS ****
 function addRandomBall() {
-  // TODO: Implement
+  list.add(randomBall());
 }
 
 function addBall(ball) {
-  // TODO: Implement
+  list.add(ball);
 }
 
-// TODO: Implement more functions
+function insertBallAfter(node, ball) {
+  return list.insertAfter(ball, node);
+}
+
+function insertBallBefore(node, ball) {
+  return list.insertBefore(ball, node);
+}
 
 function numberOfBalls() {
-  // TODO: Implement
+  return list.size();
 }
 
 // **** CANNON ****
@@ -49,9 +55,48 @@ function getCannonBall() {
 }
 
 // **** MATCHES ****
+function checkMatches(node) {
+  const matches = [node]
+  // find matche før
+  let lookAt = node;
+
+  // tjekker matches bagud
+  while (lookAt && lookAt.data == node.data) {
+    matches.push(lookAt.prev);
+    lookAt = lookAt.prev;
+  }
+  // reset til at kigge på udgangspunktet
+  lookAt = node.next;
+  
+  // tjekker matches fremad
+  while (lookAt && lookAt.data == node.data) {
+    matches.push(lookAt.next);
+    lookAt = lookAt.next;
+  }
+
+  return matches;
+
+}
+
+function removeMatches(matches) {
+  const removedMatches = [];
+
+  for (const node of matches) {
+    removeMatches.push(node)
+    list.remove(node);
+  }
+
+  return removedMatches;
+}
 
 // TODO: Implement functions to find and remove matches
+function getFirstBall() {
+  return list.head;
+}
 
+function getNextBall(ball) {
+  return ball.next;
+}
 
 // **** BALLS ****
 
@@ -76,5 +121,3 @@ function yellow() {
 function green() {
   return balls[3];
 }
-
-debugger;

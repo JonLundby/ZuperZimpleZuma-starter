@@ -1,4 +1,5 @@
 // TODO: Import controller
+import * as controller from "./controller.js"
 export {init, updateDisplay}
 
 // *********************************
@@ -17,6 +18,7 @@ function addNewBall() {
   // notify controller
   console.log("TODO: Notify controller that we want to add a new ball to the chain!")
   // TODO: Notify controller that we want to add a new ball to the chain!
+  controller.addNewBall()
 }
 
 const visualBalls = {
@@ -24,6 +26,11 @@ const visualBalls = {
   "🔵": "blue-ball.png",
   "🟡": "yellow-ball.png",
   "🟢": "green-ball.png"
+}
+
+const modelToView = new Map();
+function getVisualBalls() {
+  // TODO...............
 }
 
 function updateDisplay(model) {
@@ -37,8 +44,12 @@ function updateDisplay(model) {
   // - find the first, loop while it isn't null, inside the loop: find the next
 
   // TODO: Find the first ball
+  let ball = model.getFirstBall();
+  console.log(ball);
+  
+
   // TODO: loop while the ball isn't null
-  while( ) {
+  while(ball) {
     // add visual ball
     const visualBall = createVisualBall(ball.data);
     visualChain.append(visualBall);
@@ -46,7 +57,9 @@ function updateDisplay(model) {
     addButtonTo(visualBall, ball);
 
     // TODO: find the next ball and loop the loop
+    ball = model.getNextBall(ball);
 
+    modelToView.set(ball, visualBall)
   }
 
   // Also update the cannonball
@@ -61,6 +74,8 @@ function updateCannonBall(color) {
 }
 
 function createVisualBall(color) {
+  console.log(color);
+  
   const visualBall = document.createElement("div");
   visualBall.classList.add("ball");
   const image = document.createElement("img");
