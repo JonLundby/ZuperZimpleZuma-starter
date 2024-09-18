@@ -26,8 +26,8 @@ export default class SimpleLinkedList {
   }
 
   remove( node ) {
-    const prev = node.prev;
-    const next = node.next;
+    const prev = node?.prev;
+    const next = node?.next;
   
     if(prev == null) {
       // this is the first node - make head point to the next one

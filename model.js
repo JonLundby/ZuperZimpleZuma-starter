@@ -1,6 +1,6 @@
 import SimpleLinkedList from "./simplelinkedlist.js";
 
-export {init, getFirstBall, getNextBall, loadCannon, getCannonBall, addRandomBall, dump}
+export {init, getFirstBall, getNextBall, loadCannon, getCannonBall, addRandomBall, dump, insertBallAfter, insertBallBefore, numberOfBalls, checkMatches, removeMatches, addBall, randomBall, red, blue, yellow, green};
 
 const list = new SimpleLinkedList();
 
@@ -24,7 +24,7 @@ function dump() {
 
 // **** WRAPPERS ****
 function addRandomBall() {
-  list.add(randomBall());
+  return list.add(randomBall());
 }
 
 function addBall(ball) {
@@ -56,13 +56,13 @@ function getCannonBall() {
 
 // **** MATCHES ****
 function checkMatches(node) {
-  const matches = [node]
+  const matches = []
   // find matche før
   let lookAt = node;
 
   // tjekker matches bagud
   while (lookAt && lookAt.data == node.data) {
-    matches.push(lookAt.prev);
+    matches.push(lookAt);
     lookAt = lookAt.prev;
   }
   // reset til at kigge på udgangspunktet
@@ -70,7 +70,7 @@ function checkMatches(node) {
   
   // tjekker matches fremad
   while (lookAt && lookAt.data == node.data) {
-    matches.push(lookAt.next);
+    matches.push(lookAt);
     lookAt = lookAt.next;
   }
 
@@ -82,7 +82,7 @@ function removeMatches(matches) {
   const removedMatches = [];
 
   for (const node of matches) {
-    removeMatches.push(node)
+    removedMatches.push(node)
     list.remove(node);
   }
 

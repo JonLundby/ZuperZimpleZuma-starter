@@ -2,6 +2,7 @@ import * as view from "./view.js";
 import * as controller from "./controller.js"
 
 // TODO: Export animation functions
+export {animateNewBall}
 // ALSO: Remember to import the same functions in view
 
 // *********************************
@@ -56,7 +57,7 @@ function animateCannonBall(model, newBall) {
   view.updateDisplay(model);
 
   // Find the visualBall for this newBall
-  const visualBall; // TODO: get the visual Ball from the view
+  const visualBall = view.getVisualBallForModelNode(); // TODO: get the visual Ball from the view
 
   // Animate the space for the new ball
   animateExpandSpaceForBall(visualBall);
@@ -75,8 +76,8 @@ function animateCannonBall(model, newBall) {
   // TODO: Find the position (x and y) of the ballImage
 
   // Invert: calculate the distance to move from source to destination
-  const deltaX; 
-  const deltaY;
+  const deltaX = 100; 
+  const deltaY = 100;
 
   // Play: run the animation from source to destination
   ballImage.style.setProperty("--delta-x", deltaX + "px");
