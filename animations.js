@@ -2,7 +2,7 @@ import * as view from "./view.js";
 import * as controller from "./controller.js"
 
 // TODO: Export animation functions
-export {animateNewBall}
+export {animateNewBall, animateCannonBall, animateRemoveBalls};
 // ALSO: Remember to import the same functions in view
 
 // *********************************
@@ -13,19 +13,27 @@ export {animateNewBall}
 
 function animateNewBall(model, newBall) {
   // update entire model
+  console.log("new animated ball", newBall)
   view.updateDisplay(model)
 
   // Find the visualBall for this newBall
-  const visualBall; // TODO: get the visual Ball from the view
+  const visualBall = view.getVisualBallForModelNode(newBall); // TODO: get the visual Ball from the view
+  console.log("visualBall: ", visualBall)
 
   // We only want to animate the image - not the entire div with the button
   const onlyImg = visualBall.firstElementChild;
 
   // First: - position to start from - somewhere just outside the screen
-    
+  // const first = onlyImg.getBoundingClientRect().right;
+  const first = document.querySelector("#chain").getBoundingClientRect().right;
+  console.log(first)
+  
   // Last: - position to end - the current position of the visualBall
+  const last = onlyImg.getBoundingClientRect().x;
   
   // Invert - calculate difference
+  const deltaX = first - last;
+  onlyImg.style.setProperty("--delta-x", deltaX + "px");
   
   // Play animation
   onlyImg.classList.add("animate-add");
@@ -57,7 +65,8 @@ function animateCannonBall(model, newBall) {
   view.updateDisplay(model);
 
   // Find the visualBall for this newBall
-  const visualBall = view.getVisualBallForModelNode(); // TODO: get the visual Ball from the view
+  const visualBall = view.getVisualBallForModelNode(newBall); // TODO: get the visual Ball from the view
+  console.log("visualBall: ", visualBall)
 
   // Animate the space for the new ball
   animateExpandSpaceForBall(visualBall);
@@ -69,15 +78,19 @@ function animateCannonBall(model, newBall) {
   const visualCannonball = document.querySelector("#cannon .ball img");
   
   // TODO: Find the position (x and y) of the visualCannonBall
+  const firstX = visualCannonball.getBoundingClientRect().x;
+  const firstY = visualCannonball.getBoundingClientRect().y;
   
   // Last: Find the destination position of the ball - which is where it has been added
   const ballImage = visualBall.querySelector("img"); // only use the img, not the entire element with the button
   
   // TODO: Find the position (x and y) of the ballImage
+  const lastX = ballImage.getBoundingClientRect().x;
+  const lastY = ballImage.getBoundingClientRect().y;
 
   // Invert: calculate the distance to move from source to destination
-  const deltaX = 100; 
-  const deltaY = 100;
+  const deltaX = lastX - firstX; 
+  const deltaY = lastY - firstY;
 
   // Play: run the animation from source to destination
   ballImage.style.setProperty("--delta-x", deltaX + "px");

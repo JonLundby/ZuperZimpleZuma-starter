@@ -4,6 +4,7 @@
   animation: newBall 1s ease-in 1;
 }
 
+
 @keyframes newBall {
   0% {
     transform: translateX(var(--delta-x)) rotate(600deg);

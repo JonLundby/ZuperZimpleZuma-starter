@@ -65,7 +65,7 @@ function checkMatches(node) {
     matches.push(lookAt);
     lookAt = lookAt.prev;
   }
-  // reset til at kigge på udgangspunktet
+  // reset til at kigge på udgangspunktet +1(next)
   lookAt = node.next;
   
   // tjekker matches fremad

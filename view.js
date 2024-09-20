@@ -1,7 +1,7 @@
 import * as controller from "./controller.js";
-import { animateNewBall } from "./animations.js";
+import { animateNewBall, animateCannonBall } from "./animations.js";
 
-export { init, updateDisplay, getVisualBallForModelNode, animateNewBall };
+export { init, updateDisplay, getVisualBallForModelNode, animateNewBall, animateCannonBall };
 
 // *********************************
 // *                               *
@@ -46,7 +46,7 @@ function updateDisplay(model) {
     // - find the first, loop while it isn't null, inside the loop: find the next
 
     let ballNode = model.getFirstBall();
-    console.log(ballNode);
+    console.log("firstball: ", ballNode);
 
     while (ballNode) {
         // add visual ball
@@ -71,6 +71,10 @@ function updateCannonBall(color) {
     const visualCannonBall = createVisualBall(color);
     visualCannon.append(visualCannonBall);
 }
+
+// function getVisualCannonBall() {
+//     return document.querySelector("#cannon .ball img");
+// }
 
 function createVisualBall(color) {
     console.log(color);

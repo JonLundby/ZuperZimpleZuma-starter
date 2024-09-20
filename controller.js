@@ -31,7 +31,6 @@ function createInitialChain() {
 // TODO: Add controller functions to handle things happening in the view
 function addNewBall() {
     const newNode = model.addRandomBall();
-    view.updateDisplay(model);
     
     view.animateNewBall(model, newNode);
     
@@ -39,6 +38,7 @@ function addNewBall() {
 
 function shootCannon(node) {
     const cannonBall = model.getCannonBall();
+    console.log("Shooting cannonball: ", cannonBall);
     model.insertBallAfter(node, cannonBall);
     model.loadCannon();
     
@@ -49,8 +49,11 @@ function shootCannon(node) {
     if (matchesArr.length > 2) {
         model.removeMatches(matchesArr);
     }
+
+    view.animateCannonBall(model, cannonBall);
+
     // update the view
-    view.updateDisplay(model);
+    // view.updateDisplay(model);
 }
 
 // **** ANIMATIONS ****
