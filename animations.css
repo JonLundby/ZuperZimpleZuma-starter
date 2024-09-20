@@ -51,7 +51,8 @@
 }
 
 .animate-implode {
-  animation: implode .7s ease-in 1 forwards;
+  animation: implode 0.7s ease-in 1 forwards;
+ 
 }
 
 .animate-implode button {

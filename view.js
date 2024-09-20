@@ -1,7 +1,7 @@
 import * as controller from "./controller.js";
-import { animateNewBall, animateCannonBall } from "./animations.js";
+import { animateNewBall, animateCannonBall, animateRemoveBalls } from "./animations.js";
 
-export { init, updateDisplay, getVisualBallForModelNode, animateNewBall, animateCannonBall };
+export { init, updateDisplay, getVisualBallForModelNode, animateNewBall, animateCannonBall, animateRemoveBalls };
 
 // *********************************
 // *                               *
@@ -77,7 +77,7 @@ function updateCannonBall(color) {
 // }
 
 function createVisualBall(color) {
-    console.log(color);
+    // console.log(color);
 
     const visualBall = document.createElement("div");
     visualBall.classList.add("ball");
@@ -94,9 +94,6 @@ function addButtonTo(visualBall, ballModel) {
     button.addEventListener("click", () => {
         console.log(`Clicked button after ${ballModel.data}`);
         console.log(ballModel);
-        // notify controller
-        console.log("TODO: Notify controller that we want to insert the cannonball after this!");
-        // TODO: Notify controller that we want to insert the cannonball after this!
         controller.shootCannon(ballModel);
     });
 }

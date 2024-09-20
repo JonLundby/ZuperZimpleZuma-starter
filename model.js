@@ -56,6 +56,7 @@ function getCannonBall() {
 
 // **** MATCHES ****
 function checkMatches(node) {
+  if (!node) return;
   const matches = []
   // find matche før
   let lookAt = node;
